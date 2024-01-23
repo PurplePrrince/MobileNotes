@@ -1,0 +1,154 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".MainActivity\"\r\n    android:background=\"@color/MainColor\">\r\n\r\n    <androidx.appcompat.widget.SearchView\r\n        android:id=\"@+id/searchView_home\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:layout_marginEnd=\"16dp\"\r\n        android:layout_marginBottom=\"16dp\"\r\n        app:queryBackground=\"@drawable/bg_white_rounded\"\r\n        app:submitBackground=\"@drawable/bg_white_rounded\"\r\n        android:background=\"@drawable/bg_white_rounded\"\r\n        app:iconifiedByDefault=\"false\"\r\n        app:queryHint=\"Search...\"/>\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/recycler_home\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_below=\"@+id/searchView_home\"\r\n        android:layout_marginStart=\"8dp\"\r\n        android:layout_marginTop=\"8dp\"\r\n        android:layout_marginEnd=\"8dp\"\r\n        android:layout_marginBottom=\"8dp\">\r\n    </androidx.recyclerview.widget.RecyclerView>\r\n\r\n    <com.google.android.material.floatingactionbutton.FloatingActionButton\r\n        android:id=\"@+id/fab_add\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignParentEnd=\"true\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        android:layout_marginStart=\"26dp\"\r\n        android:layout_marginTop=\"26dp\"\r\n        android:layout_marginEnd=\"26dp\"\r\n        android:layout_marginBottom=\"26dp\"\r\n        android:src=\"@drawable/id_plus_icon\"\r\n        android:backgroundTint=\"@color/ButtonColor\"\r\n        app:borderWidth=\"0dp\"\r\n        app:fabSize=\"normal\"/>\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+--- a/app/src/main/res/layout/activity_main.xml	(revision 65aa8b3cdf381dcd2e1d515ba5faadb45748f748)
++++ b/app/src/main/res/layout/activity_main.xml	(date 1706029755921)
+@@ -27,7 +27,7 @@
+     <androidx.recyclerview.widget.RecyclerView
+         android:id="@+id/recycler_home"
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent"
++        android:layout_height="wrap_content"
+         android:layout_below="@+id/searchView_home"
+         android:layout_marginStart="8dp"
+         android:layout_marginTop="8dp"
+@@ -43,10 +43,19 @@
+         android:layout_alignParentBottom="true"
+         android:layout_marginStart="26dp"
+         android:layout_marginTop="26dp"
+-        android:layout_marginEnd="26dp"
+-        android:layout_marginBottom="26dp"
++        android:layout_marginEnd="20dp"
++        android:layout_marginBottom="92dp"
++        android:backgroundTint="@color/ButtonColor"
+         android:src="@drawable/id_plus_icon"
+-        android:backgroundTint="@color/ButtonColor"
+         app:borderWidth="0dp"
+-        app:fabSize="normal"/>
++        app:fabSize="normal" />
++    <com.google.android.material.bottomnavigation.BottomNavigationView
++        android:id="@+id/bottom_navigation"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        app:itemTextColor="@drawable/selector"
++        app:itemIconTint="@drawable/selector"
++        app:menu="@menu/menu_navigation"
++        android:layout_alignParentBottom="true"
++        />
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapplication/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.PopupMenu;\r\nimport androidx.appcompat.widget.SearchView;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\nimport androidx.recyclerview.widget.StaggeredGridLayoutManager;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\nimport com.example.myapplication.Adapter.NotesListAdapter;\r\nimport com.example.myapplication.DataBase.RoomDB;\r\nimport com.example.myapplication.Models.Notes;\r\n\r\npublic class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {\r\n\r\n    RecyclerView recyclerView;\r\n    FloatingActionButton fab_add;\r\n    NotesListAdapter notesListAdapter;\r\n    RoomDB database;\r\n    List<Notes> notes = new ArrayList<>();\r\n    SearchView searchView_home;\r\n    Notes selectedNote;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        recyclerView = findViewById(R.id.recycler_home);\r\n        fab_add = findViewById(R.id.fab_add);\r\n\r\n        searchView_home = findViewById(R.id.searchView_home);\r\n\r\n        database = RoomDB.getInstance(this);\r\n        notes = database.mainDao().getAll();\r\n\r\n\r\n        updateRecyclre(notes);\r\n\r\n        fab_add.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);\r\n                startActivityForResult(intent, 101);\r\n            }\r\n        });\r\n\r\n        searchView_home.setOnQueryTextListener(new SearchView.OnQueryTextListener() {\r\n            @Override\r\n            public boolean onQueryTextSubmit(String query) {\r\n                return false;\r\n            }\r\n\r\n            @Override\r\n            public boolean onQueryTextChange(String newText) {\r\n                filter (newText);\r\n                return true;\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void filter(String newText) {\r\n        List<Notes> filteredList = new ArrayList<>();\r\n        for (Notes singleNote : notes) {\r\n            if (singleNote.getTitle().toLowerCase().contains(newText.toLowerCase())\r\n                    ||singleNote.getNotes().toLowerCase().contains(newText.toLowerCase()) ){\r\n                filteredList.add(singleNote);\r\n            }\r\n        }\r\n        notesListAdapter.filterList(filteredList);\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n\r\n        if (requestCode == 101) {\r\n            if (resultCode == Activity.RESULT_OK) {\r\n                Notes new_notes = (Notes) data.getSerializableExtra(\"note\");\r\n                database.mainDao().insert(new_notes);\r\n                notes.clear();\r\n                notes.addAll(database.mainDao().getAll());\r\n                notesListAdapter.notifyDataSetChanged();\r\n            }\r\n\r\n        }\r\n        if (requestCode == 102){\r\n            if (resultCode == Activity.RESULT_OK){\r\n                Notes new_notes = (Notes) data.getSerializableExtra(\"note\");\r\n                database.mainDao().update(new_notes.getID(), new_notes.getTitle(), new_notes.getNotes());\r\n                notes.clear();\r\n                notes.addAll(database.mainDao().getAll());\r\n                notesListAdapter.notifyDataSetChanged();\r\n            }\r\n        }\r\n    }\r\n\r\n    private void updateRecyclre(List<Notes> notes) {\r\n        recyclerView.setHasFixedSize(true);\r\n        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));\r\n        notesListAdapter = new NotesListAdapter(MainActivity.this,notes,notesClickListener );\r\n        recyclerView.setAdapter(notesListAdapter);\r\n\r\n    }\r\n    private final NotesClickListener notesClickListener = new NotesClickListener() {\r\n        @Override\r\n        public void onClick(Notes notes) {\r\n            Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);\r\n            intent.putExtra(\"old_note\", notes);\r\n            startActivityForResult(intent, 102);\r\n\r\n        }\r\n\r\n        @Override\r\n        public void onLongClick(Notes notes, CardView cardView) {\r\n            selectedNote = new Notes();\r\n            selectedNote = notes;\r\n            showPopup (cardView);\r\n        }\r\n\r\n\r\n    };\r\n\r\n    private void showPopup(CardView cardView) {\r\n\r\n        PopupMenu popupMenu = new PopupMenu(this, cardView);\r\n        popupMenu.setOnMenuItemClickListener(this);\r\n        popupMenu.inflate(R.menu.popup_menu);\r\n        popupMenu.show();\r\n    }\r\n\r\n    @Override\r\n    public boolean onMenuItemClick(MenuItem item) {\r\n        int itemId = item.getItemId();\r\n        if (itemId == R.id.pin) {\r\n            if (selectedNote.isPinned()) {\r\n                database.mainDao().pin(selectedNote.getID(), false);\r\n                Toast.makeText(MainActivity.this, \"Unpinned\", Toast.LENGTH_SHORT).show();\r\n            } else {\r\n                database.mainDao().pin(selectedNote.getID(), true);\r\n                Toast.makeText(MainActivity.this, \"Pinned\", Toast.LENGTH_SHORT).show();\r\n            }\r\n            notes.clear();\r\n            notes.addAll(database.mainDao().getAll());\r\n            notesListAdapter.notifyDataSetChanged();\r\n            return true;\r\n        } else if (itemId == R.id.delete) {\r\n            database.mainDao().delete(selectedNote);\r\n            notes.remove(selectedNote);\r\n            notesListAdapter.notifyDataSetChanged();\r\n            Toast.makeText(MainActivity.this, \"Note removed\", Toast.LENGTH_SHORT).show();\r\n            return true;\r\n        }\r\n        return false;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/MainActivity.java b/app/src/main/java/com/example/myapplication/MainActivity.java
+--- a/app/src/main/java/com/example/myapplication/MainActivity.java	(revision 65aa8b3cdf381dcd2e1d515ba5faadb45748f748)
++++ b/app/src/main/java/com/example/myapplication/MainActivity.java	(date 1706030757919)
+@@ -1,6 +1,7 @@
+ package com.example.myapplication;
+ 
+ 
++import androidx.annotation.NonNull;
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.appcompat.widget.PopupMenu;
+@@ -12,12 +13,16 @@
+ 
+ import android.annotation.SuppressLint;
+ import android.app.Activity;
++import android.app.Notification;
+ import android.content.Intent;
+ import android.os.Bundle;
+ import android.view.MenuItem;
+ import android.view.View;
+ import android.widget.Toast;
+ 
++
++import com.example.myapplication.Models.Account;
++import com.google.android.material.bottomnavigation.BottomNavigationView;
+ import com.google.android.material.floatingactionbutton.FloatingActionButton;
+ 
+ import java.util.ArrayList;
+@@ -38,6 +43,7 @@
+     SearchView searchView_home;
+     Notes selectedNote;
+ 
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -51,6 +57,36 @@
+         database = RoomDB.getInstance(this);
+         notes = database.mainDao().getAll();
+ 
++        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
++        bottomNavigationView.setSelectedItemId(R.id.notes);
++
++        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
++            @Override
++            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
++
++                switch (item.getItemId()){
++
++                    case R.id.notes:
++                    return true;
++
++                    case R.id.notification:
++                        startActivities(new Intent(getApplicationContext()
++                                , Notification.class));
++                        overridePendingTransition(0,0);
++                        return true;
++
++                    case R.id.account:
++                        startActivities(new Intent(getApplicationContext()
++                                , Account.class));
++                        overridePendingTransition(0,0);
++                        return true;
++
++                }
++
++                return false;
++            }
++        });
++
+ 
+         updateRecyclre(notes);
+ 
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 65aa8b3cdf381dcd2e1d515ba5faadb45748f748)
++++ b/.idea/misc.xml	(date 1706022593381)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+Index: app/src/main/res/drawable/account.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/account.xml b/app/src/main/res/drawable/account.xml
+new file mode 100644
+--- /dev/null	(date 1706029488481)
++++ b/app/src/main/res/drawable/account.xml	(date 1706029488481)
+@@ -0,0 +1,5 @@
++<vector android:height="24dp" android:tint="#000000"
++    android:viewportHeight="24" android:viewportWidth="24"
++    android:width="24dp" xmlns:android="http://schemas.android.com/apk/res/android">
++    <path android:fillColor="@android:color/white" android:pathData="M19,3H5C3.9,3 3,3.9 3,5v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2V5C21,3.9 20.1,3 19,3zM12,6c1.93,0 3.5,1.57 3.5,3.5c0,1.93 -1.57,3.5 -3.5,3.5s-3.5,-1.57 -3.5,-3.5C8.5,7.57 10.07,6 12,6zM19,19H5v-0.23c0,-0.62 0.28,-1.2 0.76,-1.58C7.47,15.82 9.64,15 12,15s4.53,0.82 6.24,2.19c0.48,0.38 0.76,0.97 0.76,1.58V19z"/>
++</vector>

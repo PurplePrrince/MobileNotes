@@ -14,6 +14,14 @@
             android:theme="@style/Theme.Mynotes.NoActionBar"
             android:exported="false" />
         <activity
+            android:name=".NotificationActivity"
+            android:theme="@style/Theme.Mynotes.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:theme="@style/Theme.Mynotes.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

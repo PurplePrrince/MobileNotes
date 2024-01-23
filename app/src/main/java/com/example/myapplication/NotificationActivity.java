@@ -4,15 +4,19 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.Models.Notification;
 import java.util.Calendar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NotificationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     EditText notification_title;
@@ -86,5 +90,27 @@ public class NotificationActivity extends AppCompatActivity implements DatePicke
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String date = dayOfMonth + "/" + month + 1 + "/" + year;
         date_text.setText(date);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.notification);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int itemId = item.getItemId();
+                if (itemId == R.id.notes) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.notification) {
+                    return true;
+                } else if (itemId == R.id.account) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
 }
