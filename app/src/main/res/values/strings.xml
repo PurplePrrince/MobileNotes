@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name">Mobile Notes</string>
     <string name="todo">TODO</string>
     <string name="title">Title:</string>
     <string name="enter_text">Enter text</string>
     <string name="delete">Delete</string>
     <string name="pin_unpin">Pin/Unpin</string>
+    <string name="date">Date</string>
 </resources>

@@ -35,7 +35,7 @@
                 />
             <ImageView
                 android:id="@+id/imageView_pin"
-                android:src="@drawable/pin_icon"
+                android:src="@drawable/succes"
                 android:layout_alignParentEnd="true"
                 android:layout_width="20dp"
                 android:layout_height="20dp" />
@@ -58,12 +58,9 @@
             android:textSize="14sp"
             android:textStyle="normal"
             android:padding="8dp"
-            android:text="Date"
+            android:text="@string/date"
             android:textColor="@color/grey"
             android:maxLines="10"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
             android:singleLine="true"
             />
 
