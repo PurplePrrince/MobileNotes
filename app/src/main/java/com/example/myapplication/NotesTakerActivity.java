@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import com.example.myapplication.Models.Notes;
 public class NotesTakerActivity extends AppCompatActivity {
 
     EditText editText_title, editText_notes;
-    ImageView imageView_save;
+    ImageView fab_save;
     Notes notes;
     boolean isOldNote = false;
 
@@ -30,7 +31,7 @@ public class NotesTakerActivity extends AppCompatActivity {
         editText_title = findViewById(R.id.editText_title);
         editText_notes = findViewById(R.id.editText_notes);
 
-        imageView_save = findViewById(R.id.imageView_save);
+        fab_save = findViewById(R.id.fab_save);
 
         notes = new Notes();
         try {
@@ -43,7 +44,7 @@ public class NotesTakerActivity extends AppCompatActivity {
         }
 
 
-        imageView_save.setOnClickListener(new View.OnClickListener() {
+        fab_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String title = editText_title.getText().toString();
@@ -53,7 +54,7 @@ public class NotesTakerActivity extends AppCompatActivity {
                     Toast.makeText(NotesTakerActivity.this, "Please, enter description", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy");
                 Date date = new Date();
 
                 if (!isOldNote) {
