@@ -6,4 +6,7 @@
     <string name="delete">Delete</string>
     <string name="pin_unpin">Pin/Unpin</string>
     <string name="date">Date</string>
+    <string name="notes">Notes</string>
+    <string name="notification">Notification</string>
+    <string name="account">Account</string>
 </resources>

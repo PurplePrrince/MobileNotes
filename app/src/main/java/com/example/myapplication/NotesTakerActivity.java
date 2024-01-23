@@ -1,11 +1,13 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.example.myapplication.Models.Notes;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NotesTakerActivity extends AppCompatActivity {
 
@@ -42,6 +45,28 @@ public class NotesTakerActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.notification);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int itemId = item.getItemId();
+                if (itemId == R.id.notes) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.notification) {
+                    return true;
+                } else if (itemId == R.id.account) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
         fab_save.setOnClickListener(new View.OnClickListener() {

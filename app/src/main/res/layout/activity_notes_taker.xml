@@ -59,5 +59,12 @@
         android:baselineAligned="false"
         android:src="@drawable/ic_save"
         app:borderWidth="0dp" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        tools:ignore="MissingConstraints"/>
 
 </LinearLayout>
