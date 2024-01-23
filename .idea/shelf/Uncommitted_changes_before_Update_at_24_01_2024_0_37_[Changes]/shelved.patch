@@ -1,0 +1,375 @@
+Index: app/src/main/java/com/example/myapplication/Models/Account.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.Models;public class Account {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/Models/Account.java b/app/src/main/java/com/example/myapplication/Models/Account.java
+--- a/app/src/main/java/com/example/myapplication/Models/Account.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/Models/Account.java	(date 1706016795798)
+@@ -1,2 +1,47 @@
+-package com.example.myapplication.Models;public class Account {
++package com.example.myapplication.Models;
++
++import androidx.room.ColumnInfo;
++import androidx.room.Entity;
++import androidx.room.PrimaryKey;
++
++import java.io.Serializable;
++
++@Entity (tableName = "account")
++public class Account implements Serializable {
++
++    @PrimaryKey(autoGenerate = true)
++    int ID = 0;
++
++    @ColumnInfo (name = "name")
++    String name = "";
++
++    @ColumnInfo (name = "description")
++    String description = "";
++
++    @ColumnInfo (name = "imgID")
++    int imgID = 0;
++
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    public String getDescription() {
++        return description;
++    }
++
++    public void setDescription(String description) {
++        this.description = description;
++    }
++
++    public int getImgID() {
++        return imgID;
++    }
++
++    public void setImgID(int imgID) {
++        this.imgID = imgID;
++    }
+ }
+Index: app/src/main/java/com/example/myapplication/DataBase/notificationDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.DataBase;public interface notificationDAO {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/DataBase/notificationDAO.java b/app/src/main/java/com/example/myapplication/DataBase/notificationDAO.java
+--- a/app/src/main/java/com/example/myapplication/DataBase/notificationDAO.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/DataBase/notificationDAO.java	(date 1706017764257)
+@@ -1,2 +1,29 @@
+-package com.example.myapplication.DataBase;public interface notificationDAO {
++package com.example.myapplication.DataBase;
++
++import static androidx.room.OnConflictStrategy.REPLACE;
++
++import androidx.room.Dao;
++import androidx.room.Delete;
++import androidx.room.Insert;
++import androidx.room.Query;
++
++import com.example.myapplication.Models.Notes;
++import com.example.myapplication.Models.Notification;
++
++import java.util.List;
++
++@Dao
++public interface notificationDAO {
++
++    @Insert (onConflict = REPLACE)
++    void insert (Notification notification);
++
++    @Query ("SELECT * FROM notifications ORDER BY id DESC")
++    List<Notification> getAll();
++
++    @Query ("UPDATE notifications SET title = :title, day = :day, month = :month, year = :year WHERE ID = :id")
++    void update (String title, int day, int month, int year, int id);
++
++    @Delete
++    void delete (Notification notification);
+ }
+Index: app/src/main/java/com/example/myapplication/Models/Notification.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.Models;public class Notification {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/Models/Notification.java b/app/src/main/java/com/example/myapplication/Models/Notification.java
+--- a/app/src/main/java/com/example/myapplication/Models/Notification.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/Models/Notification.java	(date 1706016735450)
+@@ -1,2 +1,66 @@
+-package com.example.myapplication.Models;public class Notification {
++package com.example.myapplication.Models;
++
++import androidx.room.ColumnInfo;
++import androidx.room.Entity;
++import androidx.room.PrimaryKey;
++
++import java.io.Serializable;
++
++@Entity (tableName = "notifications")
++public class Notification implements Serializable {
++
++    @PrimaryKey(autoGenerate = true)
++    int ID = 0;
++
++    @ColumnInfo (name = "title")
++    String title = "";
++
++    @ColumnInfo (name = "day")
++    int day = 0;
++
++    @ColumnInfo (name = "month")
++    int month = 0;
++
++    @ColumnInfo (name = "year")
++    int year = 0;
++
++    public int getID() {
++        return ID;
++    }
++
++    public void setID(int ID) {
++        this.ID = ID;
++    }
++
++    public String getTitle() {
++        return title;
++    }
++
++    public void setTitle(String title) {
++        this.title = title;
++    }
++
++    public int getDay() {
++        return day;
++    }
++
++    public void setDay(int day) {
++        this.day = day;
++    }
++
++    public int getMonth() {
++        return month;
++    }
++
++    public void setMonth(int month) {
++        this.month = month;
++    }
++
++    public int getYear() {
++        return year;
++    }
++
++    public void setYear(int year) {
++        this.year = year;
++    }
+ }
+Index: app/src/main/java/com/example/myapplication/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication;\r\n\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.PopupMenu;\r\nimport androidx.appcompat.widget.SearchView;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\nimport androidx.recyclerview.widget.StaggeredGridLayoutManager;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.app.Activity;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n\r\nimport com.example.myapplication.Adapter.NotesListAdapter;\r\nimport com.example.myapplication.DataBase.RoomDB;\r\nimport com.example.myapplication.Models.Notes;\r\n\r\npublic class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {\r\n\r\n    RecyclerView recyclerView;\r\n    FloatingActionButton fab_add;\r\n    NotesListAdapter notesListAdapter;\r\n    RoomDB database;\r\n    List<Notes> notes = new ArrayList<>();\r\n    SearchView searchView_home;\r\n    Notes selectedNote;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        recyclerView = findViewById(R.id.recycler_home);\r\n        fab_add = findViewById(R.id.fab_add);\r\n\r\n        searchView_home = findViewById(R.id.searchView_home);\r\n\r\n        database = RoomDB.getInstance(this);\r\n        notes = database.mainDao().getAll();\r\n\r\n\r\n        updateRecyclre(notes);\r\n\r\n        fab_add.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);\r\n                startActivityForResult(intent, 101);\r\n            }\r\n        });\r\n\r\n        searchView_home.setOnQueryTextListener(new SearchView.OnQueryTextListener() {\r\n            @Override\r\n            public boolean onQueryTextSubmit(String query) {\r\n                return false;\r\n            }\r\n\r\n            @Override\r\n            public boolean onQueryTextChange(String newText) {\r\n                filter (newText);\r\n                return true;\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void filter(String newText) {\r\n        List<Notes> filteredList = new ArrayList<>();\r\n        for (Notes singleNote : notes) {\r\n            if (singleNote.getTitle().toLowerCase().contains(newText.toLowerCase())\r\n                    ||singleNote.getNotes().toLowerCase().contains(newText.toLowerCase()) ){\r\n                filteredList.add(singleNote);\r\n            }\r\n        }\r\n        notesListAdapter.filterList(filteredList);\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n\r\n        if (requestCode == 101) {\r\n            if (resultCode == Activity.RESULT_OK) {\r\n                Notes new_notes = (Notes) data.getSerializableExtra(\"note\");\r\n                database.mainDao().insert(new_notes);\r\n                notes.clear();\r\n                notes.addAll(database.mainDao().getAll());\r\n                notesListAdapter.notifyDataSetChanged();\r\n            }\r\n\r\n        }\r\n        if (requestCode == 102){\r\n            if (resultCode == Activity.RESULT_OK){\r\n                Notes new_notes = (Notes) data.getSerializableExtra(\"note\");\r\n                database.mainDao().update(new_notes.getID(), new_notes.getTitle(), new_notes.getNotes());\r\n                notes.clear();\r\n                notes.addAll(database.mainDao().getAll());\r\n                notesListAdapter.notifyDataSetChanged();\r\n            }\r\n        }\r\n    }\r\n\r\n    private void updateRecyclre(List<Notes> notes) {\r\n        recyclerView.setHasFixedSize(true);\r\n        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));\r\n        notesListAdapter = new NotesListAdapter(MainActivity.this,notes,notesClickListener );\r\n        recyclerView.setAdapter(notesListAdapter);\r\n\r\n    }\r\n    private final NotesClickListener notesClickListener = new NotesClickListener() {\r\n        @Override\r\n        public void onClick(Notes notes) {\r\n            Intent intent = new Intent(MainActivity.this, NotesTakerActivity.class);\r\n            intent.putExtra(\"old_note\", notes);\r\n            startActivityForResult(intent, 102);\r\n\r\n        }\r\n\r\n        @Override\r\n        public void onLongClick(Notes notes, CardView cardView) {\r\n            selectedNote = new Notes();\r\n            selectedNote = notes;\r\n            showPopup (cardView);\r\n        }\r\n\r\n\r\n    };\r\n\r\n    private void showPopup(CardView cardView) {\r\n\r\n        PopupMenu popupMenu = new PopupMenu(this, cardView);\r\n        popupMenu.setOnMenuItemClickListener(this);\r\n        popupMenu.inflate(R.menu.popup_menu);\r\n        popupMenu.show();\r\n    }\r\n\r\n    @Override\r\n    public boolean onMenuItemClick(MenuItem item) {\r\n        int itemId = item.getItemId();\r\n        if (itemId == R.id.pin) {\r\n            if (selectedNote.isPinned()) {\r\n                database.mainDao().pin(selectedNote.getID(), false);\r\n                Toast.makeText(MainActivity.this, \"Unpinned\", Toast.LENGTH_SHORT).show();\r\n            } else {\r\n                database.mainDao().pin(selectedNote.getID(), true);\r\n                Toast.makeText(MainActivity.this, \"Pinned\", Toast.LENGTH_SHORT).show();\r\n            }\r\n            notes.clear();\r\n            notes.addAll(database.mainDao().getAll());\r\n            notesListAdapter.notifyDataSetChanged();\r\n            return true;\r\n        } else if (itemId == R.id.delete) {\r\n            database.mainDao().delete(selectedNote);\r\n            notes.remove(selectedNote);\r\n            notesListAdapter.notifyDataSetChanged();\r\n            Toast.makeText(MainActivity.this, \"Note removed\", Toast.LENGTH_SHORT).show();\r\n            return true;\r\n        }\r\n        return false;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/MainActivity.java b/app/src/main/java/com/example/myapplication/MainActivity.java
+--- a/app/src/main/java/com/example/myapplication/MainActivity.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/MainActivity.java	(date 1706018421595)
+@@ -10,7 +10,6 @@
+ import androidx.recyclerview.widget.RecyclerView;
+ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+ 
+-import android.annotation.SuppressLint;
+ import android.app.Activity;
+ import android.content.Intent;
+ import android.os.Bundle;
+@@ -37,7 +36,6 @@
+     List<Notes> notes = new ArrayList<>();
+     SearchView searchView_home;
+     Notes selectedNote;
+-
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+@@ -52,7 +50,7 @@
+         notes = database.mainDao().getAll();
+ 
+ 
+-        updateRecyclre(notes);
++        updateRecycler(notes);
+ 
+         fab_add.setOnClickListener(new View.OnClickListener() {
+             @Override
+@@ -76,7 +74,6 @@
+         });
+ 
+     }
+-
+     private void filter(String newText) {
+         List<Notes> filteredList = new ArrayList<>();
+         for (Notes singleNote : notes) {
+@@ -87,7 +84,6 @@
+         }
+         notesListAdapter.filterList(filteredList);
+     }
+-
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
+@@ -112,8 +108,7 @@
+             }
+         }
+     }
+-
+-    private void updateRecyclre(List<Notes> notes) {
++    private void updateRecycler(List<Notes> notes) {
+         recyclerView.setHasFixedSize(true);
+         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
+         notesListAdapter = new NotesListAdapter(MainActivity.this,notes,notesClickListener );
+@@ -138,7 +133,6 @@
+ 
+ 
+     };
+-
+     private void showPopup(CardView cardView) {
+ 
+         PopupMenu popupMenu = new PopupMenu(this, cardView);
+@@ -146,7 +140,6 @@
+         popupMenu.inflate(R.menu.popup_menu);
+         popupMenu.show();
+     }
+-
+     @Override
+     public boolean onMenuItemClick(MenuItem item) {
+         int itemId = item.getItemId();
+Index: app/src/main/java/com/example/myapplication/DataBase/RoomDB.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.DataBase;\r\n\r\nimport android.content.Context;\r\nimport androidx.room.Database;\r\nimport androidx.room.Room;\r\nimport androidx.room.RoomDatabase;\r\n\r\nimport com.example.myapplication.Models.Notes;\r\n\r\n@Database(entities = Notes.class, version = 1, exportSchema = false)\r\npublic abstract class RoomDB extends RoomDatabase {\r\n\r\n    private static RoomDB database;\r\n    private static String DATABASE_NAME = \"NoteApp\";\r\n\r\n    public synchronized static RoomDB getInstance(Context context){\r\n        if (database == null) {\r\n            database = Room.databaseBuilder(context.getApplicationContext(),\r\n                            RoomDB.class, DATABASE_NAME)\r\n                    .allowMainThreadQueries()\r\n                    .fallbackToDestructiveMigration()\r\n                    .build();\r\n        }\r\n        return database;\r\n    }\r\n\r\n    public abstract mainDAO mainDao();\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java b/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java
+--- a/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java	(date 1706018603687)
+@@ -6,8 +6,10 @@
+ import androidx.room.RoomDatabase;
+ 
+ import com.example.myapplication.Models.Notes;
++import com.example.myapplication.Models.Notification;
++import com.example.myapplication.Models.Account;
+ 
+-@Database(entities = Notes.class, version = 1, exportSchema = false)
++@Database(entities = { Notes.class, Notification.class, Account.class }, version = 2, exportSchema = false)
+ public abstract class RoomDB extends RoomDatabase {
+ 
+     private static RoomDB database;
+Index: app/src/main/java/com/example/myapplication/DataBase/accountDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.DataBase;public interface accountDAO {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/DataBase/accountDAO.java b/app/src/main/java/com/example/myapplication/DataBase/accountDAO.java
+--- a/app/src/main/java/com/example/myapplication/DataBase/accountDAO.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/DataBase/accountDAO.java	(date 1706018107791)
+@@ -1,2 +1,19 @@
+-package com.example.myapplication.DataBase;public interface accountDAO {
++package com.example.myapplication.DataBase;
++
++import static androidx.room.OnConflictStrategy.REPLACE;
++
++import androidx.room.Dao;
++import androidx.room.Insert;
++import androidx.room.Query;
++
++import com.example.myapplication.Models.Account;
++
++@Dao
++public interface accountDAO {
++
++    @Insert (onConflict = REPLACE)
++    void insert (Account account);
++
++    @Query("UPDATE account SET name = :name, description = :description, imgID = :imgID WHERE ID = :id")
++    void update (int id, String name, String description, int imgID);
+ }
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" />\r\n        <option name=\"resolveExternalAnnotations\" value=\"false\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/.idea/gradle.xml	(date 1706004472314)
+@@ -5,7 +5,13 @@
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" />
++        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++            <option value="$PROJECT_DIR$/app" />
++          </set>
++        </option>
+         <option name="resolveExternalAnnotations" value="false" />
+       </GradleProjectSettings>
+     </option>
+Index: app/src/main/java/com/example/myapplication/DataBase/mainDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.DataBase;\r\n\r\nimport static androidx.room.OnConflictStrategy.REPLACE;\r\n\r\nimport androidx.room.Dao;\r\nimport androidx.room.Delete;\r\nimport androidx.room.Insert;\r\nimport androidx.room.Query;\r\n\r\nimport java.util.List;\r\n\r\nimport com.example.myapplication.Models.Notes;\r\n\r\n@Dao\r\npublic interface mainDAO {\r\n\r\n    @Insert (onConflict = REPLACE)\r\n    void  insert (Notes notes);\r\n\r\n    @Query (\"SELECT * FROM notes ORDER BY id DESC\")\r\n    List<Notes> getAll();\r\n\r\n    @Query(\"UPDATE notes SET title = :title, notes = :notes WHERE ID = :id\")\r\n    void update (int id, String title, String notes);\r\n\r\n    @Delete\r\n    void delete (Notes notes);\r\n\r\n    @Query(\"UPDATE notes SET pinned = :pin WHERE ID = :id\")\r\n    void pin (int id, boolean pin);\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/DataBase/mainDAO.java b/app/src/main/java/com/example/myapplication/DataBase/mainDAO.java
+--- a/app/src/main/java/com/example/myapplication/DataBase/mainDAO.java	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/app/src/main/java/com/example/myapplication/DataBase/mainDAO.java	(date 1706017127222)
+@@ -15,9 +15,9 @@
+ public interface mainDAO {
+ 
+     @Insert (onConflict = REPLACE)
+-    void  insert (Notes notes);
++    void insert (Notes notes);
+ 
+-    @Query ("SELECT * FROM notes ORDER BY id DESC")
++    @Query ("SELECT * FROM notes ORDER BY date DESC")
+     List<Notes> getAll();
+ 
+     @Query("UPDATE notes SET title = :title, notes = :notes WHERE ID = :id")
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" default=\"true\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision e9a560f8b2af2a33b4c5f23fecc62430f7c6e8f3)
++++ b/.idea/misc.xml	(date 1706019692960)
+@@ -1,7 +1,6 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" default="true">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+ </project>
+\ No newline at end of file

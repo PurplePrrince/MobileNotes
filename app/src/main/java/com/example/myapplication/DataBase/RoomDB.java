@@ -9,7 +9,7 @@ import com.example.myapplication.Models.Notes;
 import com.example.myapplication.Models.Notification;
 import com.example.myapplication.Models.Account;
 
-@Database(entities = { Notes.class, Notification.class, Account.class }, version = 2, exportSchema = false)
+@Database(entities = { Notes.class, Notification.class, Account.class }, version = 3, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
 
     private static RoomDB database;
