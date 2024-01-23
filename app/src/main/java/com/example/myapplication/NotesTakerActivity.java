@@ -45,27 +45,6 @@ public class NotesTakerActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.notes);
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int itemId = item.getItemId();
-                if (itemId == R.id.notes) {
-                    return true;
-                } else if (itemId == R.id.notification) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.account) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return false;
-            }
-        });
 
 
         fab_save.setOnClickListener(new View.OnClickListener() {

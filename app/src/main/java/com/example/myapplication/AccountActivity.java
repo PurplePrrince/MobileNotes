@@ -28,7 +28,7 @@ public class AccountActivity extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.notification) {
-                    startActivity(new Intent(getApplicationContext(), AccountActivity.class));
+                    startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
