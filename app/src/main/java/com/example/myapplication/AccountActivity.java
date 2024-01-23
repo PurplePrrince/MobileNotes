@@ -16,25 +16,26 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_edit);
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.account);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 int itemId = item.getItemId();
                 if (itemId == R.id.notes) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.notification) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
+                    startActivity(new Intent(getApplicationContext(), AccountActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else return itemId == R.id.account;
+                }
+                return itemId == R.id.account;
             }
         });
+
 
     }
 }

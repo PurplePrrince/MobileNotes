@@ -4,16 +4,19 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Models.Notes;
 import com.example.myapplication.Models.Notification;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,6 +64,28 @@ public class NotificationActivity extends AppCompatActivity {
                 intent.putExtra("notification", notification);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
+            }
+        });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.notification);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int itemId = item.getItemId();
+                if (itemId == R.id.notes) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.notification) {
+                    return true;
+                } else if (itemId == R.id.account) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
             }
         });
 

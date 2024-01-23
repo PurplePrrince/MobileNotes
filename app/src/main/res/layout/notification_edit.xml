@@ -69,6 +69,7 @@
         android:id="@+id/bottom_navigation"
         app:itemTextColor="@drawable/selector"
         app:itemIconTint="@drawable/selector"
+        app:menu="@menu/menu_navigation"
         android:layout_alignParentBottom="true"
         tools:ignore="MissingConstraints"/>
 </RelativeLayout>

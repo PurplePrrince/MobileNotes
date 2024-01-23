@@ -45,22 +45,21 @@ public class NotesTakerActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.notification);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setSelectedItemId(R.id.notes);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 int itemId = item.getItemId();
                 if (itemId == R.id.notes) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
-                    overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.notification) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
+                    overridePendingTransition(0, 0);
                     return true;
                 } else if (itemId == R.id.account) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
                     overridePendingTransition(0, 0);
                     return true;
                 }
