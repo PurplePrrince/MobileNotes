@@ -18,9 +18,6 @@ public class Notification implements Serializable {
     @ColumnInfo (name = "date")
     int date = 0;
 
-    @ColumnInfo (name = "time")
-    int time = 0;
-
     public int getID() {
         return ID;
     }
@@ -43,13 +40,5 @@ public class Notification implements Serializable {
 
     public void setDate(int date) {
         this.date = date;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
     }
 }

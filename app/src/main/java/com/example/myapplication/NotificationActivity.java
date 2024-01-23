@@ -1,27 +1,23 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.myapplication.Models.Notes;
 import com.example.myapplication.Models.Notification;
+import java.util.Calendar;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     EditText notification_title;
-    Button show_dates, show_time, save_notification;
-    TextView date_text, time_text;
+    Button save_notification;
+    TextView date_text;
     Notification notification;
     boolean isOldNotification = false;
 
@@ -29,12 +25,20 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification_edit);
+        date_text = findViewById(R.id.date_text);
+
+        findViewById(R.id.show_dates).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
 
         notification = new Notification();
         try {
             notification = (Notification) getIntent().getSerializableExtra("old_notification");
             notification_title.setText(notification.getTitle());
-            date_text.setText(notification.getDate());
+
             isOldNotification = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -47,8 +51,10 @@ public class NotificationActivity extends AppCompatActivity {
                 String title = notification_title.getText().toString();
                 int date = date_text.getInputType();
 
-//                @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("EEE, d MMM yyyy");
-//                Date date = new Date();
+                if(title.isEmpty()) {
+                    Toast.makeText(NotificationActivity.this, "Заполните название уведомления", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (!isOldNotification) {
                     notification = new Notification();
@@ -63,6 +69,22 @@ public class NotificationActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void showDatePickerDialog() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = dayOfMonth + "/" + month + 1 + "/" + year;
+        date_text.setText(date);
     }
 }
