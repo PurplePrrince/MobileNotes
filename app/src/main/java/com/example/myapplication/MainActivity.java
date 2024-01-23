@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     List<Notes> notes = new ArrayList<>();
     SearchView searchView_home;
     Notes selectedNote;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         notes = database.mainDao().getAll();
 
 
-        updateRecyclre(notes);
+        updateRecycler(notes);
 
         fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         });
 
     }
-
     private void filter(String newText) {
         List<Notes> filteredList = new ArrayList<>();
         for (Notes singleNote : notes) {
@@ -87,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         notesListAdapter.filterList(filteredList);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -112,8 +108,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
     }
-
-    private void updateRecyclre(List<Notes> notes) {
+    private void updateRecycler(List<Notes> notes) {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
         notesListAdapter = new NotesListAdapter(MainActivity.this,notes,notesClickListener );
@@ -138,7 +133,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     };
-
     private void showPopup(CardView cardView) {
 
         PopupMenu popupMenu = new PopupMenu(this, cardView);
@@ -146,7 +140,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         popupMenu.inflate(R.menu.popup_menu);
         popupMenu.show();
     }
-
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         int itemId = item.getItemId();

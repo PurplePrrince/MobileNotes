@@ -15,9 +15,9 @@ import com.example.myapplication.Models.Notes;
 public interface mainDAO {
 
     @Insert (onConflict = REPLACE)
-    void  insert (Notes notes);
+    void insert (Notes notes);
 
-    @Query ("SELECT * FROM notes ORDER BY id DESC")
+    @Query ("SELECT * FROM notes ORDER BY date DESC")
     List<Notes> getAll();
 
     @Query("UPDATE notes SET title = :title, notes = :notes WHERE ID = :id")
