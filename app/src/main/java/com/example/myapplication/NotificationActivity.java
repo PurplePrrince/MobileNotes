@@ -73,6 +73,26 @@ public class NotificationActivity extends AppCompatActivity implements DatePicke
                 finish();
             }
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.notification_btn);
+        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.notes_btn) {
+                    startActivities(new Intent[] {new Intent(getApplicationContext(), MainActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (itemId == R.id.account_btn) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return itemId == R.id.notification_btn;
+            }
+        });
+
     }
 
     private void showDatePickerDialog() {
@@ -90,27 +110,5 @@ public class NotificationActivity extends AppCompatActivity implements DatePicke
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String date = dayOfMonth + "/" + month + 1 + "/" + year;
         date_text.setText(date);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.notification);
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int itemId = item.getItemId();
-                if (itemId == R.id.notes) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.notification) {
-                    return true;
-                } else if (itemId == R.id.account) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return false;
-            }
-        });
-
     }
 }

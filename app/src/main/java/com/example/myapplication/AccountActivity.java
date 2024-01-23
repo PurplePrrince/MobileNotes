@@ -18,21 +18,21 @@ public class AccountActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.account);
+        bottomNavigationView.setSelectedItemId(R.id.account_btn);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
-                if (itemId == R.id.notes) {
+                if (itemId == R.id.notes_btn) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.notification) {
+                } else if (itemId == R.id.notification_btn) {
                     startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                return itemId == R.id.account;
+                return itemId == R.id.account_btn;
             }
         });
 

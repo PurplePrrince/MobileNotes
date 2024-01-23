@@ -54,24 +54,21 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         notes = database.mainDao().getAll();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.notes);
+        bottomNavigationView.setSelectedItemId(R.id.notes_btn);
         bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 int itemId = item.getItemId();
-                if (itemId == R.id.notes) {
-                    return true;
-                } else if (itemId == R.id.notification) {
+                if (itemId == R.id.notification_btn) {
                     startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
                     overridePendingTransition(0, 0);
                     return true;
-                } else if (itemId == R.id.account) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), NotificationActivity.class)});
+                } else if (itemId == R.id.account_btn) {
+                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
                     overridePendingTransition(0, 0);
                     return true;
                 }
-                return false;
+                return itemId == R.id.notes_btn;
             }
         });
 

@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/notes"
+        android:id="@+id/notes_btn"
         android:title="@string/notes"
         android:icon="@drawable/notes"/>
     <item
-        android:id="@+id/notification"
+        android:id="@+id/notification_btn"
         android:title="@string/notification"
         android:icon="@drawable/notification"/>
     <item
-        android:id="@+id/account"
+        android:id="@+id/account_btn"
         android:title="@string/account"
         android:icon="@drawable/account"/>
 
