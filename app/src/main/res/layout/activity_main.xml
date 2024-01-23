@@ -43,10 +43,18 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="26dp"
         android:layout_marginTop="26dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="86dp"
-        android:src="@drawable/id_plus_icon"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="92dp"
         android:backgroundTint="@color/ButtonColor"
+        android:src="@drawable/id_plus_icon"
         app:borderWidth="0dp"
         app:fabSize="normal"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        android:layout_alignParentBottom="true"
+        tools:ignore="MissingConstraints"/>
 </RelativeLayout>
