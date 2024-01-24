@@ -38,9 +38,6 @@
         <item name="cornerSize">20%</item>
     </style>
 
-    <style name="ImgaViewStyle" parent="View">
-        <item name="shapeAppearanceOverlay">@style/ImgShapeStyle</item>
-    </style>
 
     <style name="ImgShapeStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">20%</item>

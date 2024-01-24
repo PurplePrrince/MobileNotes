@@ -7,11 +7,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    FloatingActionButton fab_go;
+    ExtendedFloatingActionButton fab_go;
 
 
     protected void onCreate(Bundle savedInstanceState) {
