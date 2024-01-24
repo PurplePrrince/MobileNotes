@@ -21,8 +21,8 @@ public interface notificationDAO {
     @Query ("SELECT * FROM notifications ORDER BY id DESC")
     List<Notification> getAll();
 
-    @Query ("UPDATE notifications SET title = :title, day = :day, month = :month, year = :year WHERE ID = :id")
-    void update (String title, int day, int month, int year, int id);
+    @Query ("UPDATE notifications SET title = :title, date = :date WHERE ID = :id")
+    void update (int id, String title, int date);
 
     @Delete
     void delete (Notification notification);

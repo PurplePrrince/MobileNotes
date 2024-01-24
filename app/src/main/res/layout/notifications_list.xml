@@ -49,4 +49,13 @@
         android:backgroundTint="@color/ButtonColor"
         app:borderWidth="0dp"
         app:fabSize="normal"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_navigation"
+        app:menu="@menu/menu_navigation"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        android:layout_alignParentBottom="true"
+        tools:ignore="MissingConstraints"/>
 </RelativeLayout>
