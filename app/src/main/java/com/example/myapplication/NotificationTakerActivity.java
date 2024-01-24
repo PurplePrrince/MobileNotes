@@ -109,7 +109,7 @@ public class NotificationTakerActivity extends AppCompatActivity implements Date
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         month++;
-        String date = dayOfMonth + "/" + month + "/" + year;
+        String date = "Напомнить: " + dayOfMonth + "/" + month + "/" + year;
         notification_date_text.setText(date);
     }
 }

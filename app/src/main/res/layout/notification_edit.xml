@@ -26,7 +26,7 @@
 
 
     <TextView
-        android:id="@+id/notification_help_text"
+        android:id="@+id/notification_date_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText_notification_title"
@@ -36,7 +36,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/bg_white_rounded"
         android:padding="8dp"
-        android:text="Напомнить через:"
+        android:text="Напомнить:"
         android:textColor="#000"
         android:textSize="21sp"
         app:queryBackground="@drawable/bg_white_rounded"
@@ -46,22 +46,13 @@
         android:id="@+id/show_dates"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/notification_help_text"
+        android:layout_below="@+id/notification_date_text"
         android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/ButtonColor"
         android:text="Выбрать дату"
         android:textAlignment="center"
         android:textColor="@color/white" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/notification_date_text"
-        android:layout_below="@id/notification_help_text">
-    </TextView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save_notification"
