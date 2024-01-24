@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Models.Notification;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NotificationTakerActivity extends AppCompatActivity {
     EditText editText_notification_title;
@@ -40,6 +41,21 @@ public class NotificationTakerActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.notification_btn);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.notes_btn) {
+                startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.account_btn) {
+                startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return itemId == R.id.notification_btn;
+        });
 
         save_notification.setOnClickListener(view -> {
             String title = editText_notification_title.getText().toString();
