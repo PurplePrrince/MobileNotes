@@ -33,11 +33,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotificationActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
-    //    EditText notification_title;
-//    Button save_notification;
-//    TextView date_text;
-//    Notification notification;
-//    boolean isOldNotification = false;
     RecyclerView recycler_notifications;
     FloatingActionButton fab_notification_add;
     NotificationsListAdapter notificationsListAdapter;
@@ -51,7 +46,6 @@ public class NotificationActivity extends AppCompatActivity implements PopupMenu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notifications_list);
 
-//        date_text = findViewById(R.id.date_text);
         recycler_notifications = findViewById(R.id.recycler_notifications);
         fab_notification_add = findViewById(R.id.fab_notification_add);
 
@@ -62,31 +56,25 @@ public class NotificationActivity extends AppCompatActivity implements PopupMenu
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.notification_btn);
-        bottomNavigationView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                if (itemId == R.id.notes_btn) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (itemId == R.id.account_btn) {
-                    startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return itemId == R.id.notification_btn;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.notes_btn) {
+                startActivities(new Intent[]{new Intent(getApplicationContext(), MainActivity.class)});
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.account_btn) {
+                startActivities(new Intent[]{new Intent(getApplicationContext(), AccountActivity.class)});
+                overridePendingTransition(0, 0);
+                return true;
             }
+            return itemId == R.id.notification_btn;
         });
 
         updateRecycler(notifications);
 
-        fab_notification_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NotificationActivity.this, NotificationTakerActivity.class);
-                startActivityForResult(intent, 101);
-            }
+        fab_notification_add.setOnClickListener(v -> {
+            Intent intent = new Intent(NotificationActivity.this, NotificationTakerActivity.class);
+            startActivity(intent);
         });
 
         searchView_notifications.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

@@ -16,7 +16,7 @@ public class Notification implements Serializable {
     String title = "";
 
     @ColumnInfo (name = "date")
-    int date = 0;
+    String date = "";
 
     public int getID() {
         return ID;
@@ -34,11 +34,11 @@ public class Notification implements Serializable {
         this.title = title;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

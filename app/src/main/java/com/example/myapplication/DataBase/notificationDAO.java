@@ -22,7 +22,7 @@ public interface notificationDAO {
     List<Notification> getAll();
 
     @Query ("UPDATE notifications SET title = :title, date = :date WHERE ID = :id")
-    void update (int id, String title, int date);
+    void update (int id, String title, String date);
 
     @Delete
     void delete (Notification notification);

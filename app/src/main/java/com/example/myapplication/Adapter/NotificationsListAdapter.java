@@ -20,7 +20,6 @@ public class NotificationsListAdapter extends RecyclerView.Adapter <Notification
 
     Context context;
     List<Notification> list;
-
     NotificationsClickListener listener;
 
     public NotificationsListAdapter(Context context, List<Notification> list, NotificationsClickListener listener) {
@@ -32,7 +31,7 @@ public class NotificationsListAdapter extends RecyclerView.Adapter <Notification
     @NonNull
     @Override
     public NotificationsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new NotificationsViewHolder(LayoutInflater.from(context).inflate(R.layout.notifications_list, parent,false));
+        return new NotificationsViewHolder(LayoutInflater.from(context).inflate(R.layout.notification, parent,false));
     }
 
     @Override
@@ -44,21 +43,11 @@ public class NotificationsListAdapter extends RecyclerView.Adapter <Notification
         holder.textView_date.setText(list.get(position).getDate());
         holder.textView_date.setSelected(true);
 
-        holder.notification_container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onClick(list.get(holder.getAdapterPosition()));
-            }
+        holder.notification_container.setOnClickListener(view -> listener.onClick(list.get(holder.getAdapterPosition())));
+        holder.notification_container.setOnLongClickListener(view -> {
+            listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notification_container);
+            return true;
         });
-        holder.notification_container.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notification_container);
-                return true;
-            }
-        });
-
-
     }
 
 
@@ -69,7 +58,6 @@ public class NotificationsListAdapter extends RecyclerView.Adapter <Notification
 
     public void filterList (List<Notification> filteredList) {
         list = filteredList;
-        notifyDataSetChanged();
     }
 }
 
