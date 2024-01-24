@@ -70,7 +70,7 @@ public class NotificationActivity extends AppCompatActivity implements PopupMenu
             return itemId == R.id.notification_btn;
         });
 
-        updateRecycler(notifications);
+        updateRecyclre(notifications);
 
         fab_notification_add.setOnClickListener(v -> {
             Intent intent = new Intent(NotificationActivity.this, NotificationTakerActivity.class);
@@ -206,7 +206,7 @@ public class NotificationActivity extends AppCompatActivity implements PopupMenu
         }
     }
 
-    private void updateRecycler(List<Notification> notifications) {
+    private void updateRecyclre(List<Notification> notifications) {
         recycler_notifications.setHasFixedSize(true);
         recycler_notifications.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
         notificationsListAdapter = new NotificationsListAdapter(NotificationActivity.this, notifications, notificationsClickListener );

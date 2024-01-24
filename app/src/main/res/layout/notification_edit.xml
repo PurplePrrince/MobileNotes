@@ -5,34 +5,55 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:background="@color/MainColor">
     <EditText
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="50dp"
         android:id="@+id/editText_notification_title"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="Заголовок" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="8dp"
+        android:hint="@string/title"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:queryBackground="@drawable/bg_white_rounded"
+        app:submitBackground="@drawable/bg_white_rounded"
+        android:background="@drawable/bg_white_rounded"/>
 
-    <Button
+
+    <TextView
+        android:id="@+id/notification_help_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText_notification_title"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/bg_white_rounded"
+        android:padding="8dp"
+        android:text="Напомнить через:"
+        android:textColor="#000"
+        android:textSize="21sp"
+        app:queryBackground="@drawable/bg_white_rounded"
+        app:submitBackground="@drawable/bg_white_rounded" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/show_dates"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText_notification_title"
+        android:layout_below="@+id/notification_help_text"
         android:layout_centerInParent="true"
-        android:text="Выбрать дату" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:id="@+id/notification_help_text"
-        android:layout_below="@id/show_dates"
-        android:layout_centerInParent="true"
-        android:text="Напоминание состоится:"
-        android:textColor="#000"
-        android:textSize="21sp">
-    </TextView>
+        android:backgroundTint="@color/ButtonColor"
+        android:text="Выбрать дату"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,21 +63,26 @@
         android:layout_below="@id/notification_help_text">
     </TextView>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notification_date_text"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
-        android:text="Сохранить" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/id_plus_icon"
+        android:backgroundTint="@color/ButtonColor"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="80dp"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottom_navigation"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/menu_navigation"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        tools:ignore="MissingConstraints"/>
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/menu_navigation"
+        tools:ignore="MissingConstraints" />
 </RelativeLayout>
