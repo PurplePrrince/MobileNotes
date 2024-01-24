@@ -13,11 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Models.Notification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class NotificationTakerActivity extends AppCompatActivity {
     EditText editText_notification_title;
     TextView notification_date_text;
-    Button save_notification, show_dates;
+    FloatingActionButton save_notification;
+    ExtendedFloatingActionButton show_dates;
     Notification notification;
     boolean isOldNotification = false;
 

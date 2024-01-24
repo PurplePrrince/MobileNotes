@@ -44,7 +44,7 @@
         android:layout_marginStart="26dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="26dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginBottom="80dp"
         android:src="@drawable/id_plus_icon"
         android:backgroundTint="@color/ButtonColor"
         app:borderWidth="0dp"
