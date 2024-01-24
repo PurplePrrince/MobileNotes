@@ -21,6 +21,7 @@ public class NotesListAdapter extends RecyclerView.Adapter <NotesViewHolder>{
 
     Context context;
     List<Notes> list;
+
     NotesClickListener listener;
 
     public NotesListAdapter(Context context, List<Notes> list, NotesClickListener listener) {

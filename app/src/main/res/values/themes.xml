@@ -37,4 +37,9 @@
     <style name="FabShapeStyle2" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">20%</item>
     </style>
+
+
+    <style name="ImgShapeStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">20%</item>
+    </style>
 </resources>
