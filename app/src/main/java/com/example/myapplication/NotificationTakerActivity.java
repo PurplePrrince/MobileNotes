@@ -65,12 +65,7 @@ public class NotificationTakerActivity extends AppCompatActivity implements Date
             return itemId == R.id.notification_btn;
         });
 
-        show_dates.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        show_dates.setOnClickListener(v -> showDatePickerDialog());
 
         save_notification.setOnClickListener(view -> {
             String title = editText_notification_title.getText().toString();
@@ -85,6 +80,7 @@ public class NotificationTakerActivity extends AppCompatActivity implements Date
                 notification = new Notification();
             }
 
+            notification = new Notification();
             notification.setTitle(title);
             notification.setDate(date);
 

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -98,9 +99,10 @@ public class NotificationActivity extends AppCompatActivity implements PopupMenu
             if (singleNotification.getTitle().toLowerCase().contains(newText.toLowerCase()))
                 filteredList.add(singleNotification);
         }
-        notificationsListAdapter.filterList(filteredList);
+//        notificationsListAdapter.filterList(filteredList);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
