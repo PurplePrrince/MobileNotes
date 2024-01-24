@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@color/MainColor">
+
+    <ImageView
+        android:id="@+id/welcome_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/welcome"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Здравствуйте,"
+        android:textAlignment="center"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/welcome_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сергей!"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_go"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Нажмите, чтобы продолжить"
+        android:textColor="@color/white"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/ButtonColor"
+        />
+
+
+
+</LinearLayout>
