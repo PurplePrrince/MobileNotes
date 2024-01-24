@@ -9,7 +9,7 @@
     android:background="@color/MainColor">
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/welcome_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

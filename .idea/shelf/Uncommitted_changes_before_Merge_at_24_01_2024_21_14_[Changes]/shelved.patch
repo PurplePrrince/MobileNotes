@@ -1,0 +1,267 @@
+Index: app/src/main/java/com/example/myapplication/Adapter/NotesListAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.Adapter;\r\n\r\nimport android.content.Context;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.ImageView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.cardview.widget.CardView;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport java.util.List;\r\n\r\nimport com.example.myapplication.Models.Notes;\r\nimport com.example.myapplication.NotesClickListener;\r\nimport com.example.myapplication.R;\r\n\r\npublic class NotesListAdapter extends RecyclerView.Adapter <NotesViewHolder>{\r\n\r\n    Context context;\r\n    List<Notes> list;\r\n\r\n    NotesClickListener listener;\r\n\r\n    public NotesListAdapter(Context context, List<Notes> list, NotesClickListener listener) {\r\n        this.context = context;\r\n        this.list = list;\r\n        this.listener = listener;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {\r\n        return new NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.notes_list, parent,false));\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {\r\n\r\n        holder.textView_title.setText(list.get(position).getTitle());\r\n        holder.textView_title.setSelected(true);\r\n\r\n        holder.textView_notes.setText(list.get(position).getNotes());\r\n\r\n        holder.textView_date.setText(list.get(position).getDate());\r\n        holder.textView_date.setSelected(true);\r\n\r\n        if (list.get(position).isPinned()) {\r\n            holder.imageView_pin.setImageResource(R.drawable.succes);\r\n        } else {\r\n            holder.imageView_pin.setImageResource(0);\r\n        }\r\n\r\n\r\n\r\n        holder.notes_conteiner.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                listener.onClick(list.get(holder.getAdapterPosition()));\r\n            }\r\n        });\r\n        holder.notes_conteiner.setOnLongClickListener(new View.OnLongClickListener() {\r\n            @Override\r\n            public boolean onLongClick(View view) {\r\n                listener.onLongClick(list.get(holder.getAdapterPosition()), holder.notes_conteiner);\r\n                return true;\r\n            }\r\n        });\r\n\r\n\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return list.size();\r\n    }\r\n\r\n    public void filterList (List<Notes> filteredList) {\r\n        list = filteredList;\r\n        notifyDataSetChanged();\r\n    }\r\n}\r\n\r\nclass NotesViewHolder extends RecyclerView.ViewHolder {\r\n\r\n    CardView notes_conteiner;\r\n    TextView textView_title, textView_notes, textView_date;\r\n    ImageView imageView_pin;\r\n\r\n    public NotesViewHolder(@NonNull View itemView) {\r\n        super(itemView);\r\n\r\n        notes_conteiner = itemView.findViewById(R.id.notes_conteiner);\r\n        textView_title = itemView.findViewById(R.id.textView_title);\r\n        textView_notes = itemView.findViewById(R.id.textView_notes);\r\n        textView_date = itemView.findViewById(R.id.textView_date);\r\n        imageView_pin = itemView.findViewById(R.id.imageView_pin);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/Adapter/NotesListAdapter.java b/app/src/main/java/com/example/myapplication/Adapter/NotesListAdapter.java
+--- a/app/src/main/java/com/example/myapplication/Adapter/NotesListAdapter.java	(revision f0469c23cfac89adbe6808e153f833f75cea4c34)
++++ b/app/src/main/java/com/example/myapplication/Adapter/NotesListAdapter.java	(date 1706092926253)
+@@ -21,7 +21,6 @@
+ 
+     Context context;
+     List<Notes> list;
+-
+     NotesClickListener listener;
+ 
+     public NotesListAdapter(Context context, List<Notes> list, NotesClickListener listener) {
+@@ -54,8 +53,6 @@
+             holder.imageView_pin.setImageResource(0);
+         }
+ 
+-
+-
+         holder.notes_conteiner.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+Index: app/src/main/res/layout/welcome_view.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/welcome_view.xml b/app/src/main/res/layout/welcome_view.xml
+new file mode 100644
+--- /dev/null	(date 1706091502376)
++++ b/app/src/main/res/layout/welcome_view.xml	(date 1706091502376)
+@@ -0,0 +1,47 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:orientation="vertical"
++    tools:context=".MainActivity"
++    android:background="@color/MainColor">
++
++    <ImageView
++        android:id="@+id/welcome_img"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:src="@drawable/welcome"
++        android:layout_marginTop="130dp"
++        android:layout_marginBottom="20dp"
++        />
++
++    <TextView
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="Здравствуйте,"
++        android:textAlignment="center"
++        android:textSize="30sp"/>
++    <TextView
++        android:id="@+id/welcome_name"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:text="Сергей!"
++        android:textAlignment="center"
++        android:textSize="30sp"
++        android:textStyle="bold"/>
++    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
++        android:id="@+id/fab_go"
++        android:layout_width="match_parent"
++        android:layout_height="60dp"
++        android:text="Нажмите, чтобы продолжить"
++        android:textColor="@color/white"
++        android:layout_marginStart="50dp"
++        android:layout_marginEnd="50dp"
++        android:layout_marginTop="20dp"
++        android:background="@color/ButtonColor"
++        />
++
++
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/values/themes.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources xmlns:tools=\"http://schemas.android.com/tools\">\r\n    <!-- Base application theme. -->\r\n    <style name=\"Theme.Mynotes\" parent=\"Theme.MaterialComponents.DayNight.DarkActionBar\">\r\n        <!-- Primary brand color. -->\r\n        <item name=\"colorPrimary\">@color/purple_500</item>\r\n        <item name=\"colorPrimaryVariant\">@color/purple_700</item>\r\n        <item name=\"colorOnPrimary\">@color/white</item>\r\n        <!-- Secondary brand color. -->\r\n        <item name=\"colorSecondary\">@color/teal_200</item>\r\n        <item name=\"colorSecondaryVariant\">@color/teal_700</item>\r\n        <item name=\"colorOnSecondary\">@color/black</item>\r\n        <!-- Status bar color. -->\r\n        <item name=\"android:statusBarColor\" tools:targetApi=\"l\">?attr/colorPrimaryVariant</item>\r\n        <item name=\"floatingActionButtonStyle\">@style/FloatingActionButtonStyle</item>\r\n        <!-- Customize your theme here. -->\r\n    </style>\r\n\r\n    <style name=\"Theme.Mynotes.NoActionBar\" parent=\"Theme.MaterialComponents.DayNight.NoActionBar\">\r\n        <!-- Primary brand color. -->\r\n        <item name=\"colorPrimary\">@color/purple_500</item>\r\n        <item name=\"colorPrimaryVariant\">@color/purple_700</item>\r\n        <item name=\"colorOnPrimary\">@color/white</item>\r\n        <!-- Secondary brand color. -->\r\n        <item name=\"colorSecondary\">@color/teal_200</item>\r\n        <item name=\"colorSecondaryVariant\">@color/teal_700</item>\r\n        <item name=\"colorOnSecondary\">@color/black</item>\r\n        <!-- Status bar color. -->\r\n        <item name=\"android:statusBarColor\" tools:targetApi=\"l\">?attr/colorPrimaryVariant</item>\r\n        <!-- Customize your theme here. -->\r\n        <item name=\"floatingActionButtonStyle\">@style/FloatingActionButtonStyle</item>\r\n    </style>\r\n\r\n    <style name=\"FloatingActionButtonStyle\" parent=\"Widget.Design.FloatingActionButton\">\r\n        <item name=\"shapeAppearanceOverlay\">@style/FabShapeStyle2</item>\r\n    </style>\r\n\r\n    <style name=\"FabShapeStyle2\" parent=\"ShapeAppearance.MaterialComponents.SmallComponent\">\r\n        <item name=\"cornerSize\">20%</item>\r\n    </style>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/themes.xml b/app/src/main/res/values/themes.xml
+--- a/app/src/main/res/values/themes.xml	(revision f0469c23cfac89adbe6808e153f833f75cea4c34)
++++ b/app/src/main/res/values/themes.xml	(date 1706087167382)
+@@ -37,4 +37,12 @@
+     <style name="FabShapeStyle2" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+         <item name="cornerSize">20%</item>
+     </style>
++
++    <style name="ImgaViewStyle" parent="View">
++        <item name="shapeAppearanceOverlay">@style/ImgShapeStyle</item>
++    </style>
++
++    <style name="ImgShapeStyle" parent="ShapeAppearance.MaterialComponents.SmallComponent">
++        <item name="cornerSize">20%</item>
++    </style>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/myapplication/WelcomeActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/WelcomeActivity.java b/app/src/main/java/com/example/myapplication/WelcomeActivity.java
+new file mode 100644
+--- /dev/null	(date 1706094585547)
++++ b/app/src/main/java/com/example/myapplication/WelcomeActivity.java	(date 1706094585547)
+@@ -0,0 +1,33 @@
++package com.example.myapplication;
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.view.View;
++
++
++import androidx.appcompat.app.AppCompatActivity;
++
++import com.google.android.material.floatingactionbutton.FloatingActionButton;
++
++public class WelcomeActivity extends AppCompatActivity {
++
++    FloatingActionButton fab_go;
++
++
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.welcome_view);
++
++        fab_go = findViewById(R.id.fab_go);
++        findViewById(R.id.fab_go).setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                Intent intent = new Intent(view.getContext(), MainActivity.class);
++                view.getContext().startActivity(intent);
++            }
++        });
++    }
++
++
++
++}
+Index: app/src/main/java/com/example/myapplication/DataBase/RoomDB.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.myapplication.DataBase;\r\n\r\nimport android.content.Context;\r\nimport androidx.room.Database;\r\nimport androidx.room.Room;\r\nimport androidx.room.RoomDatabase;\r\n\r\nimport com.example.myapplication.Models.Notes;\r\nimport com.example.myapplication.Models.Notification;\r\nimport com.example.myapplication.Models.Account;\r\n\r\n@Database(entities = { Notes.class, Notification.class, Account.class }, version = 1, exportSchema = false)\r\npublic abstract class RoomDB extends RoomDatabase {\r\n\r\n    private static RoomDB database;\r\n    private static String DATABASE_NAME = \"NoteApp\";\r\n\r\n    public synchronized static RoomDB getInstance(Context context){\r\n        if (database == null) {\r\n            database = Room.databaseBuilder(context.getApplicationContext(),\r\n                            RoomDB.class, DATABASE_NAME)\r\n                    .allowMainThreadQueries()\r\n                    .fallbackToDestructiveMigration()\r\n                    .build();\r\n        }\r\n        return database;\r\n    }\r\n\r\n    public abstract mainDAO mainDao();\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java b/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java
+--- a/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java	(revision f0469c23cfac89adbe6808e153f833f75cea4c34)
++++ b/app/src/main/java/com/example/myapplication/DataBase/RoomDB.java	(date 1706091502366)
+@@ -9,7 +9,7 @@
+ import com.example.myapplication.Models.Notification;
+ import com.example.myapplication.Models.Account;
+ 
+-@Database(entities = { Notes.class, Notification.class, Account.class }, version = 1, exportSchema = false)
++@Database(entities = { Notes.class, Notification.class, Account.class, Welcome.class }, version = 1, exportSchema = false)
+ public abstract class RoomDB extends RoomDatabase {
+ 
+     private static RoomDB database;
+Index: app/src/main/java/com/example/myapplication/Adapter/WelcomeAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/Adapter/WelcomeAdapter.java b/app/src/main/java/com/example/myapplication/Adapter/WelcomeAdapter.java
+new file mode 100644
+--- /dev/null	(date 1706093436182)
++++ b/app/src/main/java/com/example/myapplication/Adapter/WelcomeAdapter.java	(date 1706093436182)
+@@ -0,0 +1,68 @@
++package com.example.myapplication.Adapter;
++
++import android.content.Context;
++import android.content.Intent;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import androidx.annotation.NonNull;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.example.myapplication.MainActivity;
++import com.example.myapplication.R;
++import com.example.myapplication.WelcomeClickListener;
++import com.google.android.material.floatingactionbutton.FloatingActionButton;
++
++public class WelcomeAdapter extends RecyclerView.Adapter <WelcomeViewHolder> {
++
++    Context context;
++
++    WelcomeClickListener listener;
++
++    public WelcomeAdapter(Context context, WelcomeClickListener listener) {
++        this.context = context;
++        this.listener = listener;
++    }
++
++    @NonNull
++    @Override
++    public WelcomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        return new WelcomeViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_main, parent,false));
++    }
++
++    @Override
++    public void onBindViewHolder(@NonNull WelcomeViewHolder holder, int position) {
++        holder.fab_go.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View view) {
++                Intent intent = new Intent(view.getContext(), MainActivity.class);
++                view.getContext().startActivity(intent);
++            }
++        });
++    }
++
++    @Override
++    public int getItemCount() {
++        return 0;
++    }
++}
++
++class WelcomeViewHolder extends RecyclerView.ViewHolder {
++
++
++    TextView welcome_name;
++    ImageView welcome_img;
++
++    FloatingActionButton fab_go;
++
++    public WelcomeViewHolder(@NonNull View itemView) {
++        super(itemView);
++
++        fab_go = itemView.findViewById(R.id.fab_go);
++        welcome_name = itemView.findViewById(R.id.welcome_name);
++        welcome_img = itemView.findViewById(R.id.welcome_img);
++    }
++}
+Index: app/src/main/java/com/example/myapplication/WelcomeClickListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/myapplication/WelcomeClickListener.java b/app/src/main/java/com/example/myapplication/WelcomeClickListener.java
+new file mode 100644
+--- /dev/null	(date 1706091502381)
++++ b/app/src/main/java/com/example/myapplication/WelcomeClickListener.java	(date 1706091502381)
+@@ -0,0 +1,8 @@
++package com.example.myapplication;
++
++import com.example.myapplication.Models.Account;
++
++
++public interface WelcomeClickListener {
++    void onClick(Account account);
++}
