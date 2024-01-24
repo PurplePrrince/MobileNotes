@@ -11,15 +11,12 @@
         android:theme="@style/Theme.Mynotes">
         <activity
             android:name=".NotesTakerActivity"
-            android:theme="@style/Theme.Mynotes.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".NotificationActivity"
-            android:theme="@style/Theme.Mynotes.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".AccountActivity"
-            android:theme="@style/Theme.Mynotes.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
