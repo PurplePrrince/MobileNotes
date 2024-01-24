@@ -3,31 +3,18 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class AccountActivity extends AppCompatActivity {
+public class AccountTakerActivity extends AppCompatActivity {
 
-    ExtendedFloatingActionButton settings;
-
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account);
+        setContentView(R.layout.account_edit);
 
-        settings = findViewById(R.id.settings);
-        findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), AccountTakerActivity.class);
-                view.getContext().startActivity(intent);
-            }
-        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.account_btn);
@@ -47,7 +34,5 @@ public class AccountActivity extends AppCompatActivity {
                 return itemId == R.id.account_btn;
             }
         });
-
-
     }
 }
